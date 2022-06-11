@@ -60,7 +60,27 @@ const ExpenseForm = (props) => {
     setEnteredTitle("");
   };
 
+  const [toggle, setToggle] = useState("Off");
+
+  const formToggleHandler = (event) => {
+    event.preventDefault();
+    console.log("toggling");
+    setToggle((prevState) => {
+      if (toggle == "Off") return "On";
+      return "Off";
+    });
+  };
   //   console.log(userInput);
+
+  if (toggle == "Off") {
+    return (
+      <form onSubmit={formToggleHandler}>
+        <div className="new-expense__actions">
+          <button type="submit">Add Expense</button>
+        </div>
+      </form>
+    );
+  }
 
   return (
     <form onSubmit={submitHandler}>
@@ -95,6 +115,7 @@ const ExpenseForm = (props) => {
         </div>
       </div>
       <div className="new-expense__actions">
+        <button onClick={formToggleHandler}>Cancel</button>
         <button type="submit">Add Expense</button>
       </div>
     </form>
